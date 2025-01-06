@@ -214,8 +214,8 @@ const GetStarted = () => {
       </select>
     </div>
     <div className="d-flex justify-content-end gap-3">
-    <div  class="clearfix mt-3"><button   class="float-end bg-warning  text-white btn btn-lg" onClick={handlePrevious} >back </button></div>
-    <div  class="clearfix mt-3"><button   class="float-end bg-warning  text-white btn btn-lg" onClick={handleNext} >Next </button></div>
+    <div  className="clearfix mt-3"><button   className="float-end bg-warning  text-white btn btn-lg" onClick={handlePrevious} >back </button></div>
+    <div  className="clearfix mt-3"><button   className="float-end bg-warning  text-white btn btn-lg" onClick={handleNext} >Next </button></div>
     </div>
     
     <div className="row mt-4">
