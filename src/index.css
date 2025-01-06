@@ -1,0 +1,107 @@
+* {
+  list-style: none;
+}
+body {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  
+}
+.main-content {
+  background-color: #fff;
+}
+
+.main-content {
+  padding-top: 90px;
+}
+.main-content {
+  background-color: #fff
+}
+
+.page {
+  min-height: 100vh
+}
+
+.page-1,.page-2 {
+  background: url(../public/Illustration_Bed.svg) no-repeat right center;
+  background-size: 35%
+}
+
+.page-2 {
+  background: url(/assets/images/Illustration_DiningTable.svg) no-repeat right center;
+  background-size: 35%
+}
+
+.page-7 {
+  background: url(/assets/images/Illustration_Mop&Broom.svg) no-repeat right center;
+  background-size: 35%
+}
+
+.page-3,.page-4,.page-5 {
+  background: none
+}
+.page-title{
+  font-weight: 500;
+  margin: 10px 0;
+  color: #444;
+  font-size: 28px;
+}
+.blockquote {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+blockquote {
+  margin: 0 0 1rem;
+}
+.question-label {
+  font-size: 20px;
+  color: #646464;
+  margin: 0 0 5px;
+  padding-bottom: 0;
+}
+ .small {
+  font-size: .875em;
+}
+.counter-input-display {
+  font-size: 22px;
+  width: 35px;
+  display: inline-block;
+  text-align: center;
+}
+.custom-mat-fab {
+  width: 32px;
+  height: 32px;
+  line-height: 5px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #FF8444;
+  outline: none !important;
+}
+.question-label {
+  font-size: 20px;
+  color: #646464;
+  margin: 0 0 5px;
+  padding-bottom: 0;
+}
+option {
+  font-weight: normal;
+  display: block;
+  padding-block-start: 0px;
+  padding-block-end: 1px;
+  min-block-size: 1.2em;
+  padding-inline: 2px;
+  white-space: nowrap;
+}
+.alert-secondary {
+  --bs-alert-bg: #e2e3e5 !important;
+  --bs-alert-border-color: #e2e3e5 !important;
+}
+.custom-mat-fab:active {
+  box-shadow: 0 0 5px 2px #ff8444;
+  outline: none !important;
+}
+ 
+
+ 
+ 

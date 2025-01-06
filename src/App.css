@@ -1,0 +1,52 @@
+.progress-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: #3f51b540; /* Light grey background */
+ 
+  overflow: hidden;
+}
+
+/* Fill for the Progress Bar */
+.progress-bar-fill {
+  height: 4px;
+  background-color: #3f51b5; /* Blue color for progress */
+ 
+  transition: width 0.3s ease-in-out;
+}
+.footer  {
+  background: #58baf3;
+  margin-top: 50px;
+}
+.navbar .navbar-brand img {
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  max-height: 50px;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+.navbar {
+  height: 60px;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  padding: 0;
+  box-shadow: 0 1px 10px #00000026;
+  font: 500 20px / 32px Roboto, Helvetica Neue, sans-serif;
+}
+.phone-margin {
+  margin-right: 5px;
+}
+.phone {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.text-navy{
+  color: #58baf3 !important;
+}
+.page_left {
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.bg-warning {
+background: #ff8444 !important;
+}
