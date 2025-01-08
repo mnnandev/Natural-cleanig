@@ -239,7 +239,7 @@ const Details = () => {
               </div>
             </div>
           ) : null}
-          <p  class={`alert  ${selectedOption === 'Remodel' ? 'alert-danger':'alert-success'} `}>
+          <p  className={`alert  ${selectedOption === 'Remodel' ? 'alert-danger':'alert-success'} `}>
             {
                 selectedOption === 'Get it Clean' ? 'Get it Clean Estimate - Recommended for new clients or homes that have been cleaned and maintained within the 30 days and needs a little more attention! This is for light to normal build up. If more time is needed we will contact you for approval.':''
             }
