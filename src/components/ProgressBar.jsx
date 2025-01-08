@@ -6,7 +6,7 @@ const ProgressBar = () => {
   const { currentStep, totalSteps } = useSelector((state) => state.progressBar);
 
   // Calculate progress as a percentage
-  const progress = (currentStep / totalSteps) * 100;
+  const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
 
   return (
     <div

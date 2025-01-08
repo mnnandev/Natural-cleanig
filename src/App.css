@@ -9,12 +9,12 @@
 /* Fill for the Progress Bar */
 .progress-bar-fill {
   height: 4px;
-  background-color: #3f51b5; /* Blue color for progress */
+  background-color: var(--secondary-color); /* Blue color for progress */
  
   transition: width 0.3s ease-in-out;
 }
 .footer  {
-  background: #58baf3;
+  background: var(--secondary-color);
   margin-top: 50px;
 }
 .navbar .navbar-brand img {
@@ -41,12 +41,167 @@
   margin-bottom: 0;
 }
 .text-navy{
-  color: #58baf3 !important;
+  color:var(--secondary-color) !important;
 }
 .page_left {
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .bg-warning {
-background: #ff8444 !important;
+background: var(--secondary-color) !important;
+}
+.phone-number {
+  text-decoration: none;
+}
+.accordion {
+  --bs-accordion-btn-focus-box-shadow: none;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+
+.accordion-button:not(.collapsed) {
+  color: black !important;
+}
+.list-group-item.active {
+  border-color: var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: white; 
+}
+.list-group-item  {
+  cursor: pointer;
+}
+.credit-card-image {
+  margin: 0 2px;
+  max-width: 30px;
+}
+.mat-subheading-1 {
+  text-align: center;
+}
+.card {
+  margin: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.card-list {
+  padding: 0px;
+}
+.card-list li {
+  list-style: none;
+  margin: 0;
+  padding: 7px 15px;
+}
+.card-icon {
+  margin: 0 5px 0 0;
+  max-width: 25px;
+  vertical-align: bottom;
+}
+.card-list li .price {
+  font-size: 16px;
+}
+.float-end {
+  float: right !important;
+}
+.card-list li .subtotal .price {
+  font-size: 150%;
+}
+.taxline {
+  font-size: 15px;
+}
+.accordion-button:not(.collapsed) {
+  background-color: white !important;
+}
+.btn:hover {
+  background-color: var(--secondary-color) !important;
+  color: white !important;
+  border: var(--secondary-color) !important;
+}
+.rdp-month {
+  width:100% !important;
+}
+.rdp-table {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.rdp-button_reset {
+  margin: 0 auto !important;
+}
+/* .rdp-weeknumber, .rdp-day {
+  justify-content: end !important;
+} */
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1040;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.sidebar-overlay.view {
+  visibility: visible;
+  opacity: 1;
+}
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background: white;
+  position: relative;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+@media screen and (max-width:375px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+.sidebar.slide-in {
+  transform: translateX(0);
+}
+.sidebar.slide-out {
+  transform: translateX(100%);
+}
+.close-btn {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: none;
+  z-index: 999;
+  border: none;
+  cursor: pointer;
+}
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 50px;
+}
+.menu-list li {
+  margin-bottom: 15px;
+}
+.menu-list a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+.menu-list a:hover {
+  color: #007bff;
+}
+ 
+.page_right {
+  overflow-y: scroll;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer 10+ */
+}
+
+.page_right::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }

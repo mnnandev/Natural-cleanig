@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import DianaandEllie from "../assets/DianaandEllie.png";
-import { MdBathroom } from "react-icons/md";
 import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementStep, decrementStep } from '../redux/features/progressBarSlice';
+import { incrementStep  } from '../redux/features/progressBarSlice';
+import { Link } from "react-router-dom";
 
 
 const GetStarted = () => {
@@ -16,10 +16,7 @@ const GetStarted = () => {
     dispatch(incrementStep());
   };
 
-  const handlePrevious = () => {
-    dispatch(decrementStep());
-  };
-
+  
   // Bedroom handlers
   const handleBedroomIncrement = () => {
     if (bedroomCount < 10) {
@@ -214,8 +211,9 @@ const GetStarted = () => {
       </select>
     </div>
     <div className="d-flex justify-content-end gap-3">
-    <div  className="clearfix mt-3"><button   className="float-end bg-warning  text-white btn btn-lg" onClick={handlePrevious} >back </button></div>
-    <div  className="clearfix mt-3"><button   className="float-end bg-warning  text-white btn btn-lg" onClick={handleNext} >Next </button></div>
+ 
+     
+    <Link to={'/details'}><div  className="clearfix mt-3"><button   className="float-end bg-warning  text-white btn btn-lg" onClick={handleNext} >Next </button></div> </Link>
     </div>
     
     <div className="row mt-4">
