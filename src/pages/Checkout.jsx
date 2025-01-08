@@ -33,7 +33,7 @@ const Checkout = () => {
           </div>
           Book For Free
         </div>
-        <div className="  bg-pink text-white text-center py-3 rounded">
+        <div className="bg-pink text-white text-center py-3 rounded">
   <strong>Free cancellation or reschedule</strong>
   <br />
   up to 24 hours before clean.
