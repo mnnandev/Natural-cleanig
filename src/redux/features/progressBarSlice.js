@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const savedStep = parseInt(localStorage.getItem("currentStep"), 10) || 1;
 
 const initialState = {
-  currentStep: savedStep, // Initialize from local storage
+  currentStep: savedStep,  
   totalSteps: 5,          // Total steps in the form
 };
 
@@ -15,18 +15,18 @@ const progressBarSlice = createSlice({
     incrementStep: (state) => {
       if (state.currentStep < state.totalSteps) {
         state.currentStep += 1;
-        localStorage.setItem("currentStep", state.currentStep); // Update local storage
+        localStorage.setItem("currentStep", state.currentStep);  
       }
     },
     decrementStep: (state) => {
       if (state.currentStep > 1) {
         state.currentStep -= 1;
-        localStorage.setItem("currentStep", state.currentStep); // Update local storage
+        localStorage.setItem("currentStep", state.currentStep);  
       }
     },
     resetStep: (state) => {
       state.currentStep = 1;
-      localStorage.setItem("currentStep", state.currentStep); // Update local storage
+      localStorage.setItem("currentStep", state.currentStep);  
     },
   },
 });

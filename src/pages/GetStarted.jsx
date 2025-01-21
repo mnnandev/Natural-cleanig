@@ -1,53 +1,63 @@
 import React, { useState } from "react";
 import DianaandEllie from "../assets/DianaandEllie.png";
 import { IoBedOutline } from "react-icons/io5";
+import * as Yup from "yup";
 import { LuBath } from "react-icons/lu";
-import { useDispatch, useSelector } from "react-redux";
-import { incrementStep  } from '../redux/features/progressBarSlice';
-import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { incrementStep } from "../redux/features/progressBarSlice";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 
 const GetStarted = () => {
-  const [bedroomCount, setBedroomCount] = useState(1); // Bedroom counter
-  const [bathroomCount, setBathroomCount] = useState(1); // Bathroom counter
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleNext = () => {
-    dispatch(incrementStep());
-  };
+  const formik = useFormik({
+    initialValues: {
+      address: "",
+      aptNumber: "",
+      firstName: "",
+      email: "",
+      phoneNumber: "",
+      bedrooms: 1,
+      bathrooms: 1,
+      size: "",
+    },
+    validationSchema: Yup.object({
+      address: Yup.string().required("Address is required"),
+      aptNumber: Yup.string(),
+      firstName: Yup.string().required("First name is required"),
+      email: Yup.string().email("Invalid email").required("Email is required"),
+      phoneNumber: Yup.string().required("Phone number is required"),
+      bedrooms: Yup.number().min(1).max(10).required("Bedrooms are required"),
+      bathrooms: Yup.number().min(1).max(10).required("Bathrooms are required"),
+      size: Yup.string().required("Size is required"),
+    }),
+    onSubmit: (values) => {
+      dispatch(incrementStep());
+      navigate("/details");
+      console.log('values',values)
+    },
+  });
 
-  
-  // Bedroom handlers
-  const handleBedroomIncrement = () => {
-    if (bedroomCount < 10) {
-      setBedroomCount(bedroomCount + 1);
+  // Handlers for Bedrooms and Bathrooms
+  const handleBedroomChange = (increment) => {
+    const newCount = formik.values.bedrooms + increment;
+    if (newCount >= 1 && newCount <= 10) {
+      formik.setFieldValue("bedrooms", newCount);
     }
   };
 
-  const handleBedroomDecrement = () => {
-    if (bedroomCount > 1) {
-      setBedroomCount(bedroomCount - 1);
+  const handleBathroomChange = (increment) => {
+    const newCount = formik.values.bathrooms + increment;
+    if (newCount >= 1 && newCount <= 10) {
+      formik.setFieldValue("bathrooms", newCount);
     }
   };
-
-  // Bathroom handlers
-  const handleBathroomIncrement = () => {
-    if (bathroomCount < 10) {
-      setBathroomCount(bathroomCount + 0.5);
-    }
-  };
-
-  const handleBathroomDecrement = () => {
-    if (bathroomCount > 1) {
-      setBathroomCount(bathroomCount - 0.5);
-    }
-  };
-  const formatBathroomCount = (bathroomCount) => {
-    return bathroomCount % 1 === 0 ? bathroomCount.toString() : bathroomCount.toFixed(1);
-  }; 
 
   return (
-    <div className="row page">
+    <form className="row page" onSubmit={formik.handleSubmit}>
       <div className="page_left col-lg-7 col-12">
         <div className="page-title text-center">
           Ready to Customize your Home Cleaning?
@@ -76,41 +86,68 @@ const GetStarted = () => {
         <div className="row">
           {/* Address Input */}
           <div className="col-9">
-            <label className="text-secondary m-0" htmlFor="my-address-field">
+            <label className="text-secondary m-0" htmlFor="address">
               Address
             </label>
             <input
-              autoCorrect="off"
-              autoComplete="new-password"
-              id="my-address-field"
-              autoCapitalize="off"
-              spellCheck="off"
+              id="address"
               type="text"
-              className="form-control"
-              style={{ resize: "none", height: "38px" }}
+              className={`form-control ${
+                formik.touched.address && formik.errors.address
+                  ? "is-invalid"
+                  : ""
+              }`}
+              name="address"
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="Enter a location"
             />
+            {formik.touched.address && formik.errors.address && (
+              <div className="invalid-feedback">{formik.errors.address}</div>
+            )}
           </div>
 
           {/* Apartment Number Input */}
           <div className="col">
-            <label className="text-secondary m-0" htmlFor="apt-field">
+            <label className="text-secondary m-0" htmlFor="aptNumber">
               Apt #
             </label>
-            <input type="text" id="apt-field" className="form-control" />
+            <input
+              type="text"
+              id="aptNumber"
+              className="form-control"
+              name="aptNumber"
+              value={formik.values.aptNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.aptNumber && formik.errors.aptNumber && (
+              <div className="invalid-feedback">{formik.errors.aptNumber}</div>
+            )}
           </div>
         </div>
         <div className="form-group mt-1">
-          <label className="text-secondary m-0" htmlFor="first-name">
+          <label className="text-secondary m-0" htmlFor="firstName">
             First Name
           </label>
           <input
             type="text"
-            id="first-name"
-            className="form-control"
-            required
+            id="firstName"
+            className={`form-control ${
+              formik.touched.firstName && formik.errors.firstName
+                ? "is-invalid"
+                : ""
+            }`}
+            name="firstName"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             placeholder="Enter your first name"
           />
+          {formik.touched.firstName && formik.errors.firstName && (
+            <div className="invalid-feedback">{formik.errors.firstName}</div>
+          )}
         </div>
         <div className="form-group mt-1">
           <label className="text-secondary m-0" htmlFor="email">
@@ -119,24 +156,40 @@ const GetStarted = () => {
           <input
             type="email"
             id="email"
+            className={`form-control ${
+              formik.touched.email && formik.errors.email ? "is-invalid" : ""
+            }`}
             name="email"
-            className="form-control"
-            required
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             placeholder="Enter your email"
           />
+          {formik.touched.email && formik.errors.email && (
+            <div className="invalid-feedback">{formik.errors.email}</div>
+          )}
         </div>
         <div className="form-group mt-1">
-          <label className="text-secondary m-0" htmlFor="phone-number">
+          <label className="text-secondary m-0" htmlFor="phoneNumber">
             Phone Number
           </label>
           <input
             type="tel"
-            id="phone-number"
-            name="phone-number"
-            className="form-control"
-            required
+            id="phoneNumber"
+            className={`form-control ${
+              formik.touched.phoneNumber && formik.errors.phoneNumber
+                ? "is-invalid"
+                : ""
+            }`}
+            name="phoneNumber"
+            value={formik.values.phoneNumber}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             placeholder="(000) 000-0000"
           />
+          {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+            <div className="invalid-feedback">{formik.errors.phoneNumber}</div>
+          )}
         </div>
 
         {/* Bedroom Counter */}
@@ -149,16 +202,19 @@ const GetStarted = () => {
             <button
               type="button"
               className="custom-mat-fab text-warning"
-              onClick={handleBedroomDecrement}
-              disabled={bedroomCount <= 1}
+              onClick={() => handleBedroomChange(-1)}
+              disabled={formik.values.bedrooms <= 1}
             >
               -
             </button>
-            <span className="counter-input-display">{bedroomCount}</span>
+            <span className="counter-input-display">
+              {formik.values.bedrooms}
+            </span>
             <button
+              type="button"
               className="custom-mat-fab text-warning"
-              onClick={handleBedroomIncrement}
-              disabled={bedroomCount >= 10}
+              onClick={() => handleBedroomChange(1)}
+              disabled={formik.values.bedrooms >= 10}
             >
               +
             </button>
@@ -175,58 +231,64 @@ const GetStarted = () => {
             <button
               type="button"
               className="custom-mat-fab text-warning"
-              onClick={handleBathroomDecrement}
-              disabled={bathroomCount <= 1}
+              onClick={() => handleBathroomChange(-0.5)}
+              disabled={formik.values.bathrooms <= 1}
             >
               -
             </button>
             <span className="counter-input-display">
-            {formatBathroomCount(bathroomCount)}
+              {formik.values.bathrooms}
             </span>
             <button
+              type="button"
               className="custom-mat-fab text-warning"
-              onClick={handleBathroomIncrement}
-              disabled={bathroomCount >= 10}
+              onClick={() => handleBathroomChange(0.5)}
+              disabled={formik.values.bathrooms >= 10}
             >
               +
             </button>
           </div>
         </div>
+
+        {/* Size Select */}
         <div className="form-group">
-      <label className="question-label">What is the approximate size?</label>
-      <select
-        name="area"
-        className="custom-select form-control"
-        defaultValue=""
-      >
-        <option value="0: Object">0 — 999</option>
-        <option value="1: Object">1000 — 1499</option>
-        <option value="2: Object">1500 — 1999</option>
-        <option value="3: Object">2000 — 2499</option>
-        <option value="4: Object">2500 — 2999</option>
-        <option value="5: Object">3000 — 3499</option>
-        <option value="6: Object">3500 — 3999</option>
-        <option value="7: Object">4000 — 4499</option>
-        <option value="8: Object">4500+</option>
-      </select>
-    </div>
-    <div className="d-flex justify-content-end gap-3">
- 
-     
-    <Link to={'/details'}><div  className="clearfix mt-3"><button   className="float-end bg-warning  text-white btn btn-lg" onClick={handleNext} >Next </button></div> </Link>
-    </div>
-    
-    <div className="row mt-4">
-      <div className="col-12">
-        <p className="alert alert-secondary text-muted" style={{ lineHeight: "14px" }}>
-          <small style={{ fontSize: "10px" }}>
-            By pressing 'Next' button above, I am expressing an interest in services from Naturalcare Cleaning Service. I agree to receive calls, emails, or automated text messages from Naturalcare at the contact information I have provided above. I understand I am not required to provide consent as a condition of purchasing services. Message and Data Rates May Apply. Reply Stop to Cancel. See terms and conditions
-          </small>
-        </p>
+          <label className="question-label">What is the approximate size?</label>
+          <select
+            name="size"
+            className={`custom-select form-control ${
+              formik.touched.size && formik.errors.size ? "is-invalid" : ""
+            }`}
+            value={formik.values.size}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          >
+            <option value="">Select size</option>
+            <option value="0">0 — 999</option>
+            <option value="1">1000 — 1499</option>
+            <option value="2">1500 — 1999</option>
+            <option value="3">2000 — 2499</option>
+            <option value="4">2500 — 2999</option>
+            <option value="5">3000 — 3499</option>
+            <option value="6">3500 — 3999</option>
+            <option value="7">4000 — 4499</option>
+            <option value="8">4500+</option>
+          </select>
+          {formik.touched.size && formik.errors.size && (
+            <div className="invalid-feedback">{formik.errors.size}</div>
+          )}
+        </div>
+
+        {/* Submit Button */}
+        <div className="d-flex justify-content-end gap-3">
+          <button
+            className="float-end bg-warning text-white btn btn-lg my-3"
+            type="submit"
+          >
+            Next
+          </button>
+        </div>
       </div>
-    </div>
-      </div>
-    </div>
+    </form>
   );
 };
 

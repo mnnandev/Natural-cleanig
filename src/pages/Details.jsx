@@ -16,30 +16,25 @@ const Details = () => {
       dispatch(decrementStep());
     };
   
-  // State to track the selected tab (cleaning frequency)
-  const [selectedTab, setSelectedTab] = useState("One Time"); // Default to "One Time"
-  // State to track the selected option (level of first cleaning)
-  const [selectedOption, setSelectedOption] = useState("Get it Clean"); // Default to "Get it Clean"
-  // State to track the selected dirt level
+
+  const [selectedTab, setSelectedTab] = useState("One Time");  
+  const [selectedOption, setSelectedOption] = useState("Get it Clean");  
   const [selectedLevel, setSelectedLevel] = useState("Level 1");
 
-  // Handle selection of cleaning frequency tabs
   const handleTabSelection = (event) => {
-    setSelectedTab(event.target.value); // Update selected tab
-    setSelectedOption("Get it Clean"); // Reset and default "Get it Clean" when tab changes
+    setSelectedTab(event.target.value); 
+    setSelectedOption("Get it Clean");
   };
 
-  // Handle selection of cleaning level options
   const handleOptionSelection = (event) => {
-    setSelectedOption(event.target.value); // Update selected option
+    setSelectedOption(event.target.value); 
   };
 
   // Handle selection of dirt level
   const handleLevelSelection = (event) => {
-    setSelectedLevel(event.target.value); // Update selected level
+    setSelectedLevel(event.target.value); 
   };
 
-  // Define the text for each dirt level
   const levelText = {
     "Level 1": "Level 1: My home has been cleaned within the last 2 weeks. Very light to minimal buildup.",
     "Level 2": "Level 2: My home has been cleaned in the last 4 weeks. It is light to normal buildup.",
